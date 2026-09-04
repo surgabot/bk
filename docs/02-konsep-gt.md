@@ -1,114 +1,100 @@
 # Bab 2 — Konsep Metode GT
 
-## 2.1 Ide dasar: poros Inti
+## 2.1 GT dan TABRANIJ
 
-Di metode GT, **Inti (I)** adalah pusat.
+**GT** = **Grafik Tabranij**.
 
-Dari Inti, kita “memantulkan” Awal untuk mendapat Neto:
+Cara baca grafik dalam metode ini mengikuti sistem kode **TABRANIJ**: susunan huruf yang sudah ditimbang agar mudah diingat, dibaca secara visual, dan punya padanan matematis yang jelas.
 
 ```
-Neto (N) = 2 × Inti (I) − Awal (A)
+T A B R A N I J
+│ │ │ │ │ │ │ └─ Julat (Range)
+│ │ │ │ │ │ └─── Inti (Variabel saat ini / close)
+│ │ │ │ │ └───── Neto (Domain / body)
+│ │ │ │ └─────── Awal (Konstanta / open)
+│ │ │ └───────── Rendah (Dasar bawah)
+│ │ └─────────── Bawah (Kodomain bawah body)
+│ └───────────── Atas (Kodomain atas body)
+└─────────────── Tinggi (Puncak atas)
 ```
-
-Artinya:
-
-- Jika A di **bawah** I, maka N akan di **atas** I (jarak sama).  
-- Jika A di **atas** I, maka N akan di **bawah** I.  
-
-Ini yang membuat body candle GT punya logika **simetri terhadap Inti**.
 
 ---
 
-## 2.2 Empat titik input vs titik turunan
+## 2.2 Lapisan baca: luar → dalam
 
-**Input (bisa diubah di tool):**
+1. **Kerangka luar — T dan R**  
+   Tinggi dan Rendah menetapkan **puncak** dan **dasar** periode.  
+   Julat (J) = jarak keduanya.
 
-- Tinggi (T)  
-- Awal (A)  
-- Rendah (R)  
-- Inti (I)  
+2. **Kerangka body — Atas dan Bawah**  
+   Kodomain atas/bawah body: sumbu atas dan bawah **Neto**.  
+   `Atas = max(Awal, Inti)` · `Bawah = min(Awal, Inti)`.
 
-**Turunan (otomatis):**
+3. **Isi body — Awal, Neto, Inti**  
+   - **Awal** = konstanta (pembukaan)  
+   - **Inti** = variabel saat ini (penutupan / harga sekarang)  
+   - **Neto** = domain di antara keduanya (body)
 
-- Neto (N) = `2I − A`  
-- Atas body = `max(A, N)`  
-- Bawah body = `min(A, N)`  
-- Julat (J) = rentang visual tertinggi − terendah dari {T, A, N, R}  
-
-Di visualizer, T ditandai **biru**, R **oranye/merah**, I **putih/inti**, body hijau (bull) atau merah (bear).
+Urutan hafalan mengikuti huruf TABRANIJ, sementara urutan **analisa** sering dari luar (T–R) ke dalam (Awal–Inti).
 
 ---
 
-## 2.3 Bias: Bullish vs Bearish
+## 2.3 Definisi matematis tiap komponen
 
-Aturan sederhana:
+| Kode | Komponen | Representasi | Keterangan |
+|------|----------|--------------|------------|
+| **T** | Tinggi | Puncak Atas | Harga tertinggi periode |
+| **A** | Atas | Kodomain Atas | Sumbu atas neto/body |
+| **B** | Bawah | Kodomain Bawah | Sumbu bawah neto/body |
+| **R** | Rendah | Dasar Bawah | Harga terendah periode |
+| **A** | Awal | Konstanta | Harga pembukaan periode |
+| **N** | Neto | Domain | Harga antara awal dan inti (body) |
+| **I** | Inti | Variabel Saat Ini | Harga sekarang / penutupan |
+| **J** | Julat | Range | Jangkauan rendah ke tinggi (`T − R`) |
+
+---
+
+## 2.4 Bias dari Awal dan Inti
 
 | Kondisi | Bias |
 |---------|------|
-| `N ≥ A` | **Bullish** (body hijau) |
-| `N < A` | **Bearish** (body merah) |
+| Inti ≥ Awal | **Naik / Bullish** — variabel menutup di atas (atau sama) konstanta |
+| Inti < Awal | **Turun / Bearish** — variabel menutup di bawah konstanta |
 
-Karena `N = 2I − A`:
-
-- Bullish berarti Inti “mendorong” ke arah yang membuat Neto di atas atau sama dengan Awal.  
-- Bearish sebaliknya.  
-
-**Flip arah** di tool (tombol Naik/Turun) memantulkan A terhadap I, sehingga bias bisa dibalik untuk simulasi skenario lawan.
+Neto (domain body) mengikuti arah itu: dari Awal menuju Inti.
 
 ---
 
-## 2.4 Julat (J) — ukuran “ruang” candle
-
-Julat mengukur seberapa lebar struktur candle dalam kerangka GT:
+## 2.5 Julat sebagai ukuran ruang
 
 ```
-J = max(T, A, N, R) − min(T, A, N, R)
+J = T − R
 ```
 
-Kegunaan praktis:
+- Julat besar → periode volatil; wick dan body perlu dibaca hati-hati  
+- Julat kecil → rentang sempit (sering mirip doji jika Neto juga kecil)  
 
-- Julat besar → volatilitas / rentang besar → stop dan target perlu disesuaikan  
-- Julat kecil → candle “sempit” (mirip doji dalam bahasa klasik)  
-
-Julat **bukan** selalu sama dengan `T − R` klasik, karena N bisa lebih ekstrem dari T atau R.
+Julat mengukur **jangkauan penuh** periode, bukan hanya tinggi body.
 
 ---
 
-## 2.5 Hubungan dengan candle klasik (OHLC)
+## 2.6 Satu periode vs banyak periode
 
-Pemetaan kasar (bukan 1:1 mutlak):
-
-| GT | OHLC klasik (kira-kira) |
-|----|-------------------------|
-| T | High |
-| R | Low |
-| A | Open (atau acuan awal setup) |
-| N | Close “efektif” dalam logika GT |
-| I | Titik tengah logis / core (bukan selalu midpoint body) |
-
-GT **tidak mengganti** OHLC. GT memberi **lapisan baca** di atas struktur harga: di mana poros Inti, ke mana Neto, dan bagaimana bias terbentuk.
-
----
-
-## 2.6 Satu candle vs multi-candle
-
-- **Single:** fokus paham T, A, R, I, N, J pada satu batang.  
-- **Multi:** rangkaian candle — bias bisa berganti, struktur naik/turun terbaca dari urutan body dan wick.  
-
-Timeframe (M1 … D1) mengubah “skala” volatilitas di tool (range slider), agar latihan mendekati karakter TF yang dipakai grup.
+- **Single:** kuasai T, A (Atas), B, R, A (Awal), N, I, J pada satu batang.  
+- **Multi:** urutan Inti vs Awal antar candle membentuk struktur naik/turun.  
+- **Timeframe:** mengubah skala periode (M1 … D1); kode TABRANIJ tetap sama.
 
 ---
 
 ## 2.7 Ringkasan konsep
 
-1. Inti = poros.  
-2. Neto = pantulan Awal terhadap Inti.  
-3. Bias = perbandingan N vs A.  
-4. Julat = lebar struktur GT.  
-5. Tool visualizer dipakai untuk melatih mata, bukan untuk “prediksi ajaib”.  
+1. TABRANIJ = sistem kode + hafalan + visual.  
+2. T–R = kerangka luar; Atas–Bawah = kodomain body; Awal–Neto–Inti = isi body.  
+3. Inti = variabel (close); Awal = konstanta (open).  
+4. Julat = `T − R`.  
+5. Tool visualizer melatih asosiasi huruf ↔ posisi di grafik.  
 
 ---
 
-**Lanjut → [Bab 3 — Parameter TABRANIJ](03-parameter-tabranij.md)** (akan dilengkapi)
-
+**Lanjut → [Bab 3 — Parameter TABRANIJ](03-parameter-tabranij.md)**  
 **Kembali → [Bab 1 — Pengenalan](01-pengenalan.md)**

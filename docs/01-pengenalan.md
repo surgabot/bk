@@ -4,38 +4,42 @@
 
 Buku pegangan ini dibuat khusus untuk **anggota grup investasi & trading** yang memakai metode **GT (Grafik Tabranij)**.
 
-Tujuannya sederhana:
+Tujuannya:
 
-- Menyamakan bahasa dan cara baca grafik di dalam grup  
-- Memberi kerangka kerja yang konsisten (parameter, bias, entry/exit)  
+- Menyamakan bahasa baca grafik di dalam grup  
+- Memberi kerangka kerja konsisten lewat kode **TABRANIJ**  
+- Memudahkan hafalan dan asosiasi visual  
 - Mengurangi keputusan impulsif dengan aturan yang jelas  
 
 Bukan buku “jadi kaya cepat”. Ini buku **cara kerja**.
 
 ---
 
-## 1.2 Apa itu Metode GT
+## 1.2 Apa itu Metode GT dan TABRANIJ
 
 **GT** = **Grafik Tabranij**.
 
-Metode ini memandang satu candle (atau rangkaian candle) lewat parameter tetap:
+**TABRANIJ** adalah susunan huruf dan kode yang sudah **dipikirkan, ditimbang, dan ditata** agar:
 
-| Kode | Nama | Arti singkat |
-|------|------|----------------|
-| **T** | Tinggi | Titik tertinggi (high) |
-| **A** | Awal | Harga awal / open (atau titik acuan awal) |
-| **R** | Rendah | Titik terendah (low) |
-| **I** | Inti | Titik inti / core — pusat logika GT |
-| **N** | Neto | Nilai turunan: `N = 2 × I − A` |
-| **J** | Julat | Rentang: `J = max(T,A,N,R) − min(T,A,N,R)` |
+- kalimat pembacaannya berkesan,  
+- visual di grafik mudah dikenali,  
+- padanan bilingual/matematisnya jelas,  
+- sehingga **lebih mudah dihafal dan dipakai bersama**.
 
-Dari parameter ini muncul:
+### Delapan komponen TABRANIJ
 
-- **Atas** body = `max(A, N)`  
-- **Bawah** body = `min(A, N)`  
-- **Bias** = Bullish jika `N ≥ A`, Bearish jika `N < A`
+| Kode | Komponen | Representasi matematis | Keterangan |
+|------|----------|------------------------|------------|
+| **T** | Tinggi | Puncak Atas | Harga tertinggi pada suatu periode |
+| **A** | Atas | Kodomain Atas | Sumbu atas (atasnya neto/body) |
+| **B** | Bawah | Kodomain Bawah | Sumbu bawah (bawahnya neto/body) |
+| **R** | Rendah | Dasar Bawah | Harga terendah pada suatu periode |
+| **A** | Awal | Konstanta | Harga awal / pembukaan pada suatu periode |
+| **N** | Neto | Domain | Harga antara awal dan inti (body) |
+| **I** | Inti | Variabel Saat Ini | Harga sekarang / harga penutupan |
+| **J** | Julat | Range | Jangkauan antara rendah dan tinggi |
 
-Intinya: **Inti (I)** menjadi poros. Awal (A) dan Neto (N) saling “mirror” terhadap Inti.
+Hafalkan urutan hurufnya: **T-A-B-R-A-N-I-J**.
 
 ---
 
@@ -43,33 +47,33 @@ Intinya: **Inti (I)** menjadi poros. Awal (A) dan Neto (N) saling “mirror” t
 
 Tanpa kerangka:
 
-- Satu anggota bilang “bullish”, yang lain bilang “masih ragu”  
+- Satu anggota bilang “bullish”, yang lain “masih ragu”  
 - Entry beda-beda, risiko tidak terukur  
 - Sulit review trade secara objektif  
 
-Dengan GT:
+Dengan TABRANIJ:
 
-- Semua memakai parameter yang sama  
-- Bias bisa dicek ulang di tool visualizer  
-- Diskusi grup jadi lebih cepat dan tepat  
+- Semua memakai kode dan arti yang sama  
+- Bias (Inti vs Awal) bisa dicek ulang  
+- Diskusi grup lebih cepat dan tepat  
 
 ---
 
 ## 1.4 Cara memakai buku ini
 
-1. **Baca Bagian I** sampai paham parameter (Bab 1–3).  
-2. **Latihan di tool** Tabranij Pro (folder `tools/tabranij-visualizer`).  
-3. **Lanjut Bagian II** untuk cara baca struktur multi-candle.  
-4. **Bagian III** dipakai saat eksekusi nyata (entry, exit, risiko).  
-5. **Checklist** (Bab 11) dipakai setiap sesi trading.  
+1. **Kunci definisi TABRANIJ** (Bab 1–3) sampai hafal kode + artinya.  
+2. **Latihan di tool** Tabranij Pro — asosiasikan huruf dengan posisi di candle 3D.  
+3. **Bagian II** — baca struktur multi-candle & timeframe.  
+4. **Bagian III** — entry, exit, risiko.  
+5. **Checklist** (Bab 11) setiap sesi trading.  
 
 ---
 
 ## 1.5 Batasan
 
-- Metode ini **alat bantu**, bukan jaminan profit.  
+- Metode ini **alat bantu baca grafik**, bukan jaminan profit.  
 - Market bisa invalidasi setup kapan saja.  
-- Disiplin risiko lebih penting daripada “menebak arah”.  
+- Disiplin risiko lebih penting daripada menebak arah.  
 
 ---
 
