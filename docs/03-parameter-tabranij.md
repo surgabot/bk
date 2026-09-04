@@ -32,7 +32,7 @@ TARI = Tinggi · Awal · Rendah · Inti
 |------|----------|--------------|--------|------------|
 | **A** | Atas | Kodomain / wick atas | `T − max(Awal, I)` | Panjang wick atas |
 | **B** | Bawah | Kodomain / wick bawah | `min(Awal, I) − R` | Panjang wick bawah |
-| **N** | Neto | Domain body | `\|I − Awal\|` | Lebar body |
+| **N** | Neto | Domain body | `|I − Awal|` | Lebar body |
 | **J** | Julat | Range | `T − R` | Jangkauan penuh |
 
 **Identitas:**
@@ -115,5 +115,5 @@ Kalimat pengingat:
 
 ---
 
-**Lanjut → Bab 4 (siap dilanjutkan)**  
+**Lanjut → [Bab 4 — Membaca Candle dengan GT](04-membaca-candle.md)**  
 **Kembali → [Bab 2 — Konsep GT](02-konsep-gt.md)**
