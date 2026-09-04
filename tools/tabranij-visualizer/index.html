@@ -2,7 +2,8 @@
 <html><head><meta charset="UTF-8"><title>TABRANIJ Pro v3</title></head>
 <body>
 <p style="font-family:sans-serif;color:#888;padding:20px">Loading Tabranij Pro v3.0…</p>
-<script src="data.js"></script>
+<script src="d0.js"></script>
+<script src="d1.js"></script>
 <script>
 async function go(){
   const bin=Uint8Array.from(atob(window.__TB64),c=>c.charCodeAt(0));
@@ -10,6 +11,6 @@ async function go(){
   const ab=await new Response(new Blob([bin]).stream().pipeThrough(ds)).arrayBuffer();
   document.open();document.write(new TextDecoder().decode(ab));document.close();
 }
-go().catch(e=>{document.body.innerHTML="<pre style=color:red>"+e+"</pre>"});
+go().catch(e=>{document.body.innerHTML="<pre style=color:red>"+e+"\n\nBuka via local server (python -m http.server) atau download semua file.</pre>"});
 </script>
 </body></html>
