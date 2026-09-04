@@ -1,27 +1,20 @@
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8"><title>TABRANIJ Pro v3.1</title></head>
-<body style="margin:0;background:#06080f;color:#8b97b8;font-family:system-ui;padding:24px">
-<p id="msg">Memuat Tabranij Pro v3.1…</p>
+<body style="margin:0;background:#06080f;color:#8b97b8;font-family:system-ui;padding:20px">
+<p id="msg">Memuat…</p>
 <script>
 (async function(){
-  try {
-    var parts = [];
-    for (var i = 0; i < 8; i++) {
-      var r = await fetch("part" + i + ".html");
-      if (!r.ok) throw new Error("Gagal memuat part" + i + ".html (HTTP " + r.status + ")");
-      parts.push(await r.text());
+  try{
+    var a=[];
+    for(var i=0;i<3;i++){
+      var r=await fetch("m"+i+".html");
+      if(!r.ok) throw new Error("part m"+i+".html gagal (HTTP "+r.status+")");
+      a.push(await r.text());
     }
-    document.open();
-    document.write(parts.join(""));
-    document.close();
-  } catch (e) {
-    document.getElementById("msg").innerHTML =
-      "<b style=color:#f87171>Error:</b> " + (e.message || e) +
-      "<br><br>Jalankan: <code>python3 -m http.server 8080</code><br>" +
-      "Buka: <b>http://localhost:8080</b><br>" +
-      "File wajib: index.html + part0.html … part7.html";
-    console.error(e);
+    document.open();document.write(a.join(""));document.close();
+  }catch(e){
+    document.getElementById("msg").innerHTML="<b style=color:#f87171>Error:</b> "+(e.message||e)+
+    "<br><br>Jalankan: <code>python3 -m http.server 8080</code><br>Buka http://localhost:8080<br>File: index.html + m0.html + m1.html + m2.html";
   }
 })();
-</script>
-</body></html>
+</script></body></html>
