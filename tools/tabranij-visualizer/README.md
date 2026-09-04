@@ -20,7 +20,7 @@ Visualizer diselaraskan dengan definisi final TABRANIJ di buku pegangan.
 | **Neto** | `|I − Awal|` | Lebar body |
 | **Julat** | `T − R` | Range penuh |
 
-**Identitas:** `Julat = Atas + Neto + Bawah` (dicek di UI)
+**Identitas:** `Julat = Atas + Neto + Bawah` (dicek di UI dengan ✓)
 
 **Bias:** Bullish jika `I ≥ Awal`, Bearish jika `I < Awal`
 
@@ -31,7 +31,12 @@ Body digambar dari **Awal → Inti**.
 ```bash
 cd tools/tabranij-visualizer
 python3 -m http.server 8080
-# http://localhost:8080
+# buka http://localhost:8080
 ```
 
-File: `index.html` + `d0.js` + `d1.js`
+## File yang dibutuhkan
+
+- `index.html` — loader
+- `p0.js` … `p3.js` — payload aplikasi (gzip+base64)
+
+> Download ZIP repo, extract, lalu jalankan local server di folder ini.
