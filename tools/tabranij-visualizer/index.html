@@ -1,32 +1,25 @@
 <!DOCTYPE html>
-<html lang="id"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>TABRANIJ Pro v3.1 — TARI</title></head>
+<html><head><meta charset="UTF-8"><title>TABRANIJ Pro v3.1</title></head>
 <body style="margin:0;background:#06080f;color:#8b97b8;font-family:system-ui;padding:24px">
-<p id="msg">Memuat Tabranij Pro v3.1 (TARI)…</p>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
-<script src="p0.js"></script>
-<script src="p1.js"></script>
-<script src="p2.js"></script>
-<script src="p3.js"></script>
+<p id="msg">Memuat Tabranij Pro v3.1…</p>
 <script>
-(function(){
+(async function(){
   try {
-    if (typeof pako === "undefined") throw new Error("pako gagal dimuat (perlu internet)");
-    if (!window.__P0 || !window.__P1 || !window.__P2 || !window.__P3)
-      throw new Error("File p0.js–p3.js tidak lengkap. Pastikan 4 file ada di folder yang sama.");
-    var b64 = window.__P0 + window.__P1 + window.__P2 + window.__P3;
-    var bin = Uint8Array.from(atob(b64), function(c){ return c.charCodeAt(0); });
-    var html = pako.ungzip(bin, { to: "string" });
+    var parts = [];
+    for (var i = 0; i < 8; i++) {
+      var r = await fetch("part" + i + ".html");
+      if (!r.ok) throw new Error("Gagal memuat part" + i + ".html (HTTP " + r.status + ")");
+      parts.push(await r.text());
+    }
     document.open();
-    document.write(html);
+    document.write(parts.join(""));
     document.close();
   } catch (e) {
     document.getElementById("msg").innerHTML =
-      "<b style=color:#f87171>Error:</b> " + e.message +
-      "<br><br>Cara benar:<br>1. cd tools/tabranij-visualizer<br>" +
-      "2. python3 -m http.server 8080<br>" +
-      "3. Buka <b>http://localhost:8080</b> (bukan file://)<br>" +
-      "4. Pastikan p0.js p1.js p2.js p3.js ada di folder ini";
+      "<b style=color:#f87171>Error:</b> " + (e.message || e) +
+      "<br><br>Jalankan: <code>python3 -m http.server 8080</code><br>" +
+      "Buka: <b>http://localhost:8080</b><br>" +
+      "File wajib: index.html + part0.html … part7.html";
     console.error(e);
   }
 })();
