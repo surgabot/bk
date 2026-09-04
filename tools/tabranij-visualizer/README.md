@@ -1,45 +1,28 @@
-# Tabranij Pro — Visualizer Metode GT
+# Tabranij Pro v3.0
 
-Tool interaktif 3D untuk visualisasi metode **GT (Grafik Tabranij)**.
+Visualizer 3D metode GT dengan fitur:
 
-## Cara Membuka
+- **Multi-Candle** — tampilkan series candle berdampingan
+- **Timeframe** — M1, M5, M15, H1, H4, D1
+- **History** — simpan/muat parameter (localStorage)
+- Single & Multi mode
+- Export PNG, Copy values, Preset, Direction flip
 
-Buka file `index.html` di browser (double-click atau drag ke browser).
+## Cara pakai
 
-Karena repository private, cara termudah:
-1. Download file `index.html`
-2. Buka langsung di browser
+1. Download `index.html`
+2. Buka di browser
 
-Atau clone repo lalu buka file tersebut.
+Atau buka langsung dari repo (raw / local clone).
 
-## Fitur v2.0 (lebih canggih dari versi dasar)
+## Fitur Multi-Candle
 
-| Fitur | Keterangan |
-|-------|------------|
-| **UI Modern** | Dark theme, glassmorphism, layout 2 kolom |
-| **3D Candle** | Material PBR, multi-light, glow effect, grid |
-| **Smooth Camera** | Drag rotasi halus + scroll zoom + auto-rotate |
-| **Hold-to-Adjust** | Tahan tombol ▲▼ untuk naik/turun cepat |
-| **6 Preset** | Bullish, Bearish, Doji, Long Wick, Hammer, Random |
-| **Direction Flip** | Toggle Naik/Turun (mirror Awal lewat Inti) |
-| **Hasil Lengkap** | T, A, R, I, N (Neto), J (Julat), Atas, Bawah |
-| **Bias Indicator** | Bullish / Bearish / Neutral di overlay |
-| **Export PNG** | Simpan gambar visualisasi |
-| **Copy Values** | Salin parameter ke clipboard |
-| **Responsive** | Bisa dipakai di desktop & mobile |
-| **Toast Feedback** | Notifikasi aksi |
+1. Pilih mode **Multi**
+2. Klik **Generate** untuk buat series acak
+3. Navigasi candle dengan tombol ‹ ›
+4. Edit parameter candle aktif
+5. **+ Candle** untuk tambah manual
 
-## Parameter GT
+## History
 
-| Kode | Nama | Warna |
-|------|------|-------|
-| **T** | Tinggi | Biru |
-| **A** | Awal | Putih |
-| **R** | Rendah | Merah |
-| **I** | Inti | Hijau |
-| **N** | Neto | `2 × Inti − Awal` |
-| **J** | Julat | Tinggi − Rendah |
-
-## Status
-
-✅ v2.0 sudah tersedia di `index.html`
+Klik 💾 untuk menyimpan state saat ini. History tersimpan di browser (localStorage), max 30 entry.
