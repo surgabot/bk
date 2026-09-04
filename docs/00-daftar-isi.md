@@ -2,7 +2,7 @@
 
 ## Metode GT — Grafik Tabranij
 
-**Edisi internal · Private**
+**Edisi internal · Private · Bab 1–12 lengkap**
 
 ---
 
