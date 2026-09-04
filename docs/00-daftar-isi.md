@@ -2,7 +2,7 @@
 
 ## Metode GT — Grafik Tabranij
 
-**Edisi internal · Private · Bab 1–12 lengkap**
+**Edisi internal · Private · Bab 1–15**
 
 ---
 
@@ -27,6 +27,11 @@
 10. [Tool Visualizer Tabranij Pro](10-tool-visualizer.md)  
 11. [Checklist Harian Grup](11-checklist-harian.md)  
 12. [Glosarium](12-glosarium.md)  
+
+### Bagian V — Finansial & Kebiasaan
+13. [Nasihat Investasi](13-nasihat-investasi.md)  
+14. [Jurnal Trading](14-jurnal-trading.md)  
+15. [Mengelola Keuntungan dengan Bijak](15-mengelola-keuntungan.md)  
 
 ---
 
