@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>TABRANIJ Pro v3.1 — TARI</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#06080f;--bg2:#0b101c;--sf:#111827;--sf2:#1a2332;--bd:#1e2a3f;--fg:#e8eefc;--mu:#7b8ba8;--p:#38bdf8;--ok:#34d399;--no:#f87171;--t:#60a5fa;--r:#f87171;--i:#4ade80}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:Inter,system-ui,sans-serif;min-height:100vh}
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--bd);background:rgba(11,16,28,.95);position:sticky;top:0;z-index:10}
+.logo{display:flex;align-items:center;gap:8px}
+.mark{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#38bdf8,#34d399);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;color:#051018}
+h1{font-family:Space Grotesk,sans-serif;font-size:1.05rem}
+h1 span{background:linear-gradient(90deg,#38bdf8,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.badge{font-size:.58rem;padding:2px 6px;border-radius:5px;background:rgba(56,189,248,.15);color:var(--p);border:1px solid rgba(56,189,248,.3)}
+.acts{display:flex;gap:5px;flex-wrap:wrap}
+.btn{background:var(--sf);border:1px solid var(--bd);color:var(--fg);padding:5px 10px;border-radius:6px;font-size:.72rem;cursor:pointer}
+.btn.pri{background:var(--p);color:#051018;border:0;font-weight:600}
+.main{display:grid;grid-template-columns:1fr 360px;height:calc(100vh - 50px);max-width:1600px;margin:0 auto}
+@media(max-width:900px){.main{grid-template-columns:1fr;height:auto}}
+.cav{position:relative;background:var(--bg2);border-right:1px solid var(--bd);display:flex;flex-direction:column;min-height:360px}
+#cv{width:100%;flex:1;display:block}
+.ov{position:absolute;top:10px;left:10px;right:10px;display:flex;flex-wrap:wrap;gap:6px;pointer-events:none}
+.oc{background:rgba(11,16,28,.85);border:1px solid var(--bd);border-radius:8px;padding:5px 9px;font-size:.7rem}
+.oc .l{color:var(--mu);font-size:.58rem}.oc .v{font-family:JetBrains Mono,monospace;font-weight:600;font-size:.82rem}
+.bb{color:var(--ok)}.br{color:var(--no)}
+.sp{overflow-y:auto;background:var(--bg2);max-height:calc(100vh - 50px)}
+@media(max-width:900px){.sp{max-height:none}}
+.sec{padding:12px 14px;border-bottom:1px solid var(--bd
