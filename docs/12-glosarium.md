@@ -108,7 +108,8 @@
 - “Julat wajib = Atas + Neto + Bawah.”  
 - “Bias dari I vs Awal; arah dari rangkaian.”  
 - “Entry tanpa invalidation = tidak valid.”  
-- “Skip itu keputusan, bukan ketinggalan.”
+- “Skip itu keputusan, bukan ketinggalan.”  
+- “Profit = bonus, bukan gaji tetap.”
 
 ---
 
@@ -128,9 +129,12 @@
 | Tool | 10 |
 | Checklist harian | 11 |
 | Glosarium | 12 |
+| Nasihat investasi | 13 |
+| Jurnal trading | 14 |
+| Mengelola keuntungan | 15 |
 
 ---
 
-**Selesai — Buku Pegangan GT (Bab 1–12).**  
+**Lanjut → [Bab 13 — Nasihat Investasi](13-nasihat-investasi.md)**  
 **Daftar isi → [00-daftar-isi.md](00-daftar-isi.md)**  
 **Kembali → [Bab 11 — Checklist Harian](11-checklist-harian.md)**
