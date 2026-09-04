@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>TABRANIJ Pro — Visualizer Metode GT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #06080f;
+      --bg-elevated: #0b101c;
+      --surface: #111827;
+      --surface-2: #1a2332;
+      --border: #1e2a3f;
+      --border-light: #2a3a55;
+      --fg: #e8eefc;
+      --muted: #7b8ba8;
+      --primary: #38bdf8;
+      --primary-dim: #0ea5e9;
+      --success: #34d399;
+      --danger: #f87171;
+      --warning: #fbbf24;
+      --core: #a5b4fc;
+      --tinggi: #60a5fa;
+      --awal: #e2e8f0;
+      --rendah: #f87171;
+      --inti: #4ade80;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 8px 32px rgba(0,0,0,0.4);
+      --glow: 0 0 24px rgba(56,189,248,0.25);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Inter', system-ui, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(56,189,248,0.08), transparent),
+        radial-gradient(ellipse 60% 40% at 100% 100%, rgba(52,211,153,0.05), transparent);
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(11,16,28,0.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #38bdf8, #34d399);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      color: #051018;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .logo h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .logo h1 span {
+      background: linear-gradient(90deg, #38bdf8, #34d399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .logo .badge {
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: rgba(56,189,248,0.15);
+      color: var(--primary);
+      border: 1px solid rgba(56,189,248,0.3);
+      letter-spacing: 0.04em;
+    }
+    .header-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .hdr-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--fg);
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hdr-btn:hover {
+      background: var(--surface-2);
+      border-color: var(--border-light);
+    }
+    .hdr-btn.primary {
+      background: var(--primary);
+      color: #051018;
+      border-color: var(--primary);
+      font-weight: 600;
+    }
+    .hdr-btn.primary:hover {
+      background: #7dd3fc;
+    }
+
+    /* ===== MAIN LAYOUT ===== */
+    .main {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 0;
+      height: calc(100vh - 65px);
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+    @media (max-width: 960px) {
+      .main {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+    }
+
+    /* ===== CANVAS AREA ===== */
+    .canvas-area {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-elevated);
+      border-right: 1px solid var(--border);
+    }
+    #canvas-box {
+      flex: 1;
+      min-height: 420px;
+      position: relative;
+      overflow: hidden;
+      cursor: grab;
+    }
+    #canvas-box:active { cursor: grabbing; }
+    #canvas-box canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+
+    /* Overlay info di canvas */
+    .canvas-overlay {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      right: 16px;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .overlay-card {
+      background: rgba(11,16,28,0.75);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 0.78rem;
+      pointer-events: auto;
+    }
+    .overlay-card .label {
+      color: var(--muted);
+      font-size: 0.7rem;
+      margin-bottom: 2px;
+    }
+    .overlay-card .value {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .bias-bull { color: var(--success); }
+    .bias-bear { color: var(--danger); }
+    .bias-neutral { color: var(--warning); }
+
+    .canvas-hint {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(11,16,28,0.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 0.72rem;
+      color: var(--muted);
+      pointer-events: none;
+      opacity: 0.8;
+    }
+
+    /* ===== SIDE PANEL ===== */
+    .side-panel {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-elevated);
+      overflow-y: auto;
+      max-height: calc(100vh - 65px);
+    }
+    @media (max-width: 960px) {
+      .side-panel { max-height: none; }
+    }
+
+    .panel-section {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .panel-section:last-child { border-bottom: none; }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .section-title h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* Preset buttons */
+    .preset-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+    .preset-btn {
+      padding: 8px 6px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--fg);
+      font-size: 0.75rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-align: center;
+    }
+    .preset-btn:hover {
+      background: var(--surface-2);
+      border-color: var(--border-light);
+    }
+    .preset-btn.active {
+      background: rgba(56,189,248,0.15);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .preset-btn.bull { border-color: rgba(52,211,153,0.4); }
+    .preset-btn.bull:hover, .preset-btn.bull.active {
+      background: rgba(52,211,153,0.12);
+      border-color: var(--success);
+      color: var(--success);
+    }
+    .preset-btn.bear { border-color: rgba(248,113,113,0.4); }
+    .preset-btn.bear:hover, .preset-btn.bear.active {
+      background: rgba(248,113,113,0.12);
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+
+    /* Parameter controls */
+    .param-item {
+      margin-bottom: 16px;
+    }
+    .param-item:last-child { margin-bottom: 0; }
+
+    .param-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .param-name {
+      font-weight: 600;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .param-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .param-name.tinggi { color: var(--tinggi); }
+    .param-name.tinggi .param-dot { background: var(--tinggi); box-shadow: 0 0 6px var(--tinggi); }
+    .param-name.awal { color: var(--awal); }
+    .param-name.awal .param-dot { background: var(--awal); box-shadow: 0 0 6px var(--awal); }
+    .param-name.rendah { color: var(--rendah); }
+    .param-name.rendah .param-dot { background: var(--rendah); box-shadow: 0 0 6px var(--rendah); }
+    .param-name.inti { color: var(--inti); }
+    .param-name.inti .param-dot { background: var(--inti); box-shadow: 0 0 6px var(--inti); }
+
+    .value-control {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2px 4px;
+    }
+    .value-control input {
+      width: 78px;
+      background: transparent;
+      border: none;
+      color: var(--fg);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-align: right;
+      outline: none;
+      padding: 4px 2px;
+    }
+    .spin-btn {
+      width: 26px;
+      height: 26px;
+      border: none;
+      border-radius: 6px;
+      background: var(--surface-2);
+      color: var(--fg);
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      transition: background 0.1s;
+    }
+    .spin-btn:hover { background: #2a3a55; }
+    .spin-btn:active { background: var(--primary); color: #051018; }
+
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 5px;
+      background: var(--surface);
+      border-radius: 4px;
+      outline: none;
+      margin-top: 2px;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      background: var(--primary);
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid #0ea5e9;
+      box-shadow: 0 0 8px rgba(56,189,248,0.4);
+      transition: transform 0.1s;
+    }
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    /* Results */
+    .result-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .result-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+    .result-item .r-label {
+      font-size: 0.68rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 3px;
+    }
+    .result-item .r-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .result-item.full { grid-column: 1 / -1; }
+    .result-item .r-formula {
+      font-size: 0.68rem;
+      color: var(--muted);
+      margin-top: 2px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Direction toggle */
+    .dir-toggle {
+      display: flex;
+      background: var(--surface);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .dir-toggle button {
+      flex: 1;
+      padding: 9px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .dir-toggle button.active-naik {
+      background: rgba(52,211,153,0.15);
+      color: var(--success);
+    }
+    .dir-toggle button.active-turun {
+      background: rgba(248,113,113,0.15);
+      color: var(--danger);
+    }
+
+    /* Range info */
+    .range-bar {
+      height: 6px;
+      background: var(--surface);
+      border-radius: 3px;
+      margin-top: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+    .range-fill {
+      position: absolute;
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--rendah), var(--inti), var(--tinggi));
+      transition: all 0.3s;
+    }
+
+    /* Footer tip */
+    .tip-box {
+      background: rgba(56,189,248,0.06);
+      border: 1px solid rgba(56,189,248,0.15);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .tip-box strong { color: var(--primary); }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--surface-2);
+      border: 1px solid var(--border-light);
+      color: var(--fg);
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      z-index: 999;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+      box-shadow: var(--shadow);
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-mark">GT</div>
+      <div>
+        <h1><span>TABRANIJ</span> Pro</h1>
+      </div>
+      <span class="badge">v2.0</span>
+    </div>
+    <div class="header-actions">
+      <button class="hdr-btn" onclick="resetView()" title="Reset kamera">↻ Reset View</button>
+      <button class="hdr-btn" onclick="copyValues()" title="Salin nilai">📋 Copy</button>
+      <button class="hdr-btn primary" onclick="exportPNG()" title="Export gambar">⬇ Export</button>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <div class="main">
+    <!-- CANVAS -->
+    <div class="canvas-area">
+      <div id="canvas-box">
+        <div class="canvas-overlay">
+          <div class="overlay-card">
+            <div class="label">Bias</div>
+            <div class="value" id="biasLabel">—</div>
+          </div>
+          <div class="overlay-card" style="text-align:right">
+            <div class="label">Julat (Range)</div>
+            <div class="value" id="rangeLabel">—</div>
+          </div>
+        </div>
+        <div class="canvas-hint">Drag untuk rotasi · Scroll untuk zoom</div>
+      </div>
+    </div>
+
+    <!-- SIDE PANEL -->
+    <div class="side-panel">
+
+      <!-- Presets -->
+      <div class="panel-section">
+        <div class="section-title">
+          <h2>Preset</h2>
+        </div>
+        <div class="preset-grid">
+          <button class="preset-btn bull" onclick="setPreset('bull')">Bullish</button>
+          <button class="preset-btn bear" onclick="setPreset('bear')">Bearish</button>
+          <button class="preset-btn" onclick="setPreset('doji')">Doji</button>
+          <button class="preset-btn" onclick="setPreset('long')">Long Wick</button>
+          <button class="preset-btn" onclick="setPreset('hammer')">Hammer</button>
+          <button class="preset-btn" onclick="setPreset('random')">Random</button>
+        </div>
+      </div>
+
+      <!-- Direction -->
+      <div class="panel-section">
+        <div class="section-title">
+          <h2>Arah (Flip Awal)</h2>
+        </div>
+        <div class="dir-toggle">
+          <button id="btnNaik" class="active-naik" onclick="setDir(true)">▲ Naik</button>
+          <button id="btnTurun" onclick="setDir(false)">▼ Turun</button>
+        </div>
+      </div>
+
+      <!-- Parameters -->
+      <div class="panel-section">
+        <div class="section-title">
+          <h2>Parameter</h2>
+        </div>
+
+        <!-- Tinggi -->
+        <div class="param-item">
+          <div class="param-header">
+            <span class="param-name tinggi"><span class="param-dot"></span> Tinggi (T)</span>
+            <div class="value-control">
+              <button class="spin-btn" onmousedown="startAdjust('tinggi',-0.1)" onmouseup="stopAdjust()" onmouseleave="stopAdjust()" ontouchstart="startAdjust('tinggi',-0.1)" ontouchend="stopAdjust()">▼</button>
+              <input type="text" id="valTinggi" value="2684.50" onblur="validateInput('tinggi')" onkeydown="if(event.key==='Enter')validateInput('tinggi')">
+              <button class="spin-btn" onmousedown="startAdjust('tinggi',0.1)" onmouseup="stopAdjust()" onmouseleave="stopAdjust()" ontouchstart="startAdjust('tinggi',0.1)" ontouchend="stopAdjust()">▲</button>
+            </div>
+          </div>
+          <input type="range" id="sliderTinggi" min="2500" max="2800" step="0.1" value="2684.50" oninput="fromSlider('tinggi')">
+        </div>
+
+        <!-- Awal -->
+        <div class="param-item">
+          <div class="param-header">
+            <span class="param-name awal"><span class="param-dot"></span> Awal (A)</span>
+            <div class="value-control">
+              <button class="spin-btn" onmousedown="startAdjust('awal',-0.1)" onmouseup="stopAdjust()" onmouseleave="stopAdjust()" ontouchstart="startAdjust('awal',-0.1)" ontouchend="stopAdjust()">▼</button>
+              <input type="text" id="valAwal" value="2658.30" onblur="validateInput('awal')" onkeydown="if(event.key==='Enter')validateInput('awal')">
+              <button class="spin-btn" onmousedown="startAdjust('awal',0.1)" onmouseup="stopAdjust()" onmouseleave="stopAdjust()" ontouchstart="startAdjust('awal',0.1)" ontouchend="stopAdjust()">▲</button>
+            </div>
+          </div>
+          <input type="range" id="sliderAwal" min="2500" max="2800" step="0.1" value="2658.30" oninput="fromSlider('awal')">
+        </div>
+
+        <!-- Rendah -->
+        <div class="param-item">
+          <div class="param-header">
+            <span class="param-name rendah"><span class="param-dot"></span> Rendah (R)</span>
+            <div class="value-control">
+              <button class="spin-btn" onmousedown="startAdjust('rendah',-0.1)" onmouseup="stopAdjust()" onmouseleave="stopAdjust()" ontouchstart="startAdjust('rendah',-0.1)" ontouchend="stopAdjust()">▼</button>
+              <input type="text" id="valRendah" value="2641.80" onblur="validateInput('rendah')" onkeydown="if(event.key==='Enter')validateInput('rendah')">
+              <button class="spin-btn" onmousedown="startAdjust('rendah',0.1)" onmouseup="stopAdjust()" onmouseleave="stopAdjust()" ontouchstart="startAdjust('rendah',0.1)" ontouchend="stopAdjust()">▲</button>
+            </div>
+          </div>
+          <input type="range" id="sliderRendah" min="2500" max="2800" step="0.1" value="2641.80" oninput="fromSlider('rendah')">
+        </div>
+
+        <!-- Inti -->
+        <div class="param-item">
+          <div class="param-header">
+            <span class="param-name inti"><span class="param-dot"></span> Inti (I)</span>
+            <div class="value-control">
+              <button class="spin-btn" onmousedown="startAdjust('inti',-0.1)" onmouseup="stopAdjust()" onmouseleave="stopAdjust()" ontouchstart="startAdjust('inti',-0.1)" ontouchend="stopAdjust()">▼</button>
+              <input type="text" id="valInti" value="2667.40" onblur="validateInput('inti')" onkeydown="if(event.key==='Enter')validateInput('inti')">
+              <button class="spin-btn" onmousedown="startAdjust('inti',0.1)" onmouseup="stopAdjust()" onmouseleave="stopAdjust()" ontouchstart="startAdjust('inti',0.1)" ontouchend="stopAdjust()">▲</button>
+            </div>
+          </div>
+          <input type="range" id="sliderInti" min="2500" max="2800" step="0.1" value="2667.40" oninput="fromSlider('inti')">
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="panel-section">
+        <div class="section-title">
+          <h2>Hasil Perhitungan</h2>
+        </div>
+        <div class="result-grid" id="hasil">
+          <!-- filled by JS -->
+        </div>
+        <div class="range-bar"><div class="range-fill" id="rangeFill"></div></div>
+      </div>
+
+      <!-- Tip -->
+      <div class="panel-section">
+        <div class="tip-box">
+          <strong>Tips:</strong> Tahan tombol ▲▼ untuk adjust cepat. Drag canvas untuk rotasi 3D. Scroll untuk zoom. Neto = 2×Inti − Awal.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script>
+    // ===== STATE =====
+    let Tinggi = 2684.50;
+    let Awal   = 2658.30;
+    let Rendah = 2641.80;
+    let Inti   = 2667.40;
+    let isNaik = true;
+
+    // Hold button
+    let adjustInterval = null;
+    let adjustTimeout = null;
+
+    function startAdjust(key, delta) {
+      adjustValue(key, delta);
+      adjustTimeout = setTimeout(() => {
+        adjustInterval = setInterval(() => adjustValue(key, delta), 50);
+      }, 350);
+    }
+    function stopAdjust() {
+      clearTimeout(adjustTimeout);
+      clearInterval(adjustInterval);
+      adjustInterval = null;
+      adjustTimeout = null;
+    }
+
+    function adjustValue(key, delta) {
+      const map = { tinggi: Tinggi, awal: Awal, rendah: Rendah, inti: Inti };
+      let newVal = Math.round((map[key] + delta) * 100) / 100;
+      if (newVal < 0) newVal = 0;
+      setParam(key, newVal);
+    }
+
+    function setParam(key, val) {
+      if (key === 'tinggi') Tinggi = val;
+      if (key === 'awal')   Awal = val;
+      if (key === 'rendah') Rendah = val;
+      if (key === 'inti')   Inti = val;
+      const capital = key.charAt(0).toUpperCase() + key.slice(1);
+      document.getElementById('val' + capital).value = val.toFixed(2);
+      document.getElementById('slider' + capital).value = val;
+      drawCrystal();
+    }
+
+    function validateInput(key) {
+      const capital = key.charAt(0).toUpperCase() + key.slice(1);
+      const input = document.getElementById('val' + capital);
+      let raw = input.value.trim().replace(',', '.');
+      let num = parseFloat(raw);
+      const fallback = { tinggi: Tinggi, awal: Awal, rendah: Rendah, inti: Inti }[key];
+      if (isNaN(num) || !isFinite(num) || num < 0) num = fallback;
+      else num = Math.round(num * 100) / 100;
+      setParam(key, num);
+    }
+
+    function fromSlider(key) {
+      const capital = key.charAt(0).toUpperCase() + key.slice(1);
+      let val = Math.round(parseFloat(document.getElementById('slider' + capital).value) * 100) / 100;
+      setParam(key, val);
+    }
+
+    // ===== THREE.JS SETUP =====
+    const box = document.getElementById('canvas-box');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0b101c);
+    scene.fog = new THREE.Fog(0x0b101c, 20, 40);
+
+    const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+    camera.position.set(0, 1.5, 16);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    box.appendChild(renderer.domElement);
+
+    // Lights
+    scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+    const keyLight = new THREE.DirectionalLight(0xffffff, 1.1);
+    keyLight.position.set(6, 12, 8);
+    scene.add(keyLight);
+    const fillLight = new THREE.DirectionalLight(0x88aaff, 0.35);
+    fillLight.position.set(-6, 4, -4);
+    scene.add(fillLight);
+    const rimLight = new THREE.DirectionalLight(0x38bdf8, 0.25);
+    rimLight.position.set(0, -5, -8);
+    scene.add(rimLight);
+
+    // Grid helper subtle
+    const grid = new THREE.GridHelper(20, 20, 0x1e2a3f, 0x141c2e);
+    grid.position.y = -6;
+    scene.add(grid);
+
+    const crystal = new THREE.Group();
+    scene.add(crystal);
+
+    // Materials
+    const matBull = new THREE.MeshStandardMaterial({ color: 0x10b981, metalness: 0.3, roughness: 0.4, transparent: true, opacity: 0.92 });
+    const matBear = new THREE.MeshStandardMaterial({ color: 0xef4444, metalness: 0.3, roughness: 0.4, transparent: true, opacity: 0.92 });
+    const matWick = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.5, roughness: 0.3 });
+    const matBlue = new THREE.MeshStandardMaterial({ color: 0x3b82f6, emissive: 0x1e40af, emissiveIntensity: 0.4, metalness: 0.2, roughness: 0.3 });
+    const matOrange = new THREE.MeshStandardMaterial({ color: 0xf97316, emissive: 0x9a3412, emissiveIntensity: 0.35, metalness: 0.2, roughness: 0.3 });
+    const matCore = new THREE.MeshStandardMaterial({ color: 0xf1f5f9, emissive: 0x64748b, emissiveIntensity: 0.3, metalness: 0.4, roughness: 0.2 });
+    const matGlow = new THREE.MeshBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.15 });
+
+    function drawCrystal() {
+      while (crystal.children.length) crystal.remove(crystal.children[0]);
+
+      const Neto = 2 * Inti - Awal;
+      const visualHigh = Math.max(Tinggi, Awal, Neto, Rendah);
+      const visualLow  = Math.min(Tinggi, Awal, Neto, Rendah);
+      const range = visualHigh - visualLow || 1;
+      const scale = 10.5 / range;
+      const mid = (visualHigh + visualLow) / 2;
+      const y = v => (v - mid) * scale;
+
+      const yH = y(visualHigh);
+      const yL = y(visualLow);
+      const yO = y(Awal);
+      const yC = y(Neto);
+      const yTop = Math.max(yO, yC);
+      const yBot = Math.min(yO, yC);
+      const bodyH = Math.max(Math.abs(yTop - yBot), 0.2);
+
+      // Body
+      const isBull = Neto >= Awal;
+      const body = new THREE.Mesh(new THREE.BoxGeometry(2.2, bodyH, 2.2), isBull ? matBull : matBear);
+      body.position.y = (yTop + yBot) / 2;
+      body.castShadow = true;
+      crystal.add(body);
+
+      // Soft glow around body
+      const glow = new THREE.Mesh(new THREE.BoxGeometry(2.6, bodyH + 0.3, 2.6), matGlow);
+      glow.position.y = body.position.y;
+      crystal.add(glow);
+
+      // Upper wick
+      if (yH - yTop > 0.08) {
+        const w = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.09, yH - yTop, 12), matWick);
+        w.position.y = yTop + (yH - yTop) / 2;
+        crystal.add(w);
+      }
+      // Lower wick
+      if (yBot - yL > 0.08) {
+        const w = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.09, yBot - yL, 12), matWick);
+        w.position.y = yL + (yBot - yL) / 2;
+        crystal.add(w);
+      }
+
+      // Marker spheres
+      function sphere(yp, mat, size = 0.34) {
+        const s = new THREE.Mesh(new THREE.SphereGeometry(size, 20, 20), mat);
+        s.position.y = yp;
+        return s;
+      }
+      crystal.add(sphere(yH, matBlue));
+      crystal.add(sphere(yL, matOrange));
+      crystal.add(sphere(y(Inti), matCore, 0.38));
+
+      // Update results panel
+      const Atas = Math.max(Awal, Neto);
+      const Bawah = Math.min(Awal, Neto);
+      const Julat = visualHigh - visualLow;
+
+      document.getElementById('hasil').innerHTML = `
+        <div class="result-item">
+          <div class="r-label">T · Tinggi</div>
+          <div class="r-value" style="color:var(--tinggi)">${Tinggi.toFixed(2)}</div>
+        </div>
+        <div class="result-item">
+          <div class="r-label">R · Rendah</div>
+          <div class="r-value" style="color:var(--rendah)">${Rendah.toFixed(2)}</div>
+        </div>
+        <div class="result-item">
+          <div class="r-label">A · Awal</div>
+          <div class="r-value" style="color:var(--awal)">${Awal.toFixed(2)}</div>
+        </div>
+        <div class="result-item">
+          <div class="r-label">I · Inti</div>
+          <div class="r-value" style="color:var(--inti)">${Inti.toFixed(2)}</div>
+        </div>
+        <div class="result-item">
+          <div class="r-label">N · Neto</div>
+          <div class="r-value" style="color:var(--primary)">${Neto.toFixed(2)}</div>
+          <div class="r-formula">2×I − A</div>
+        </div>
+        <div class="result-item">
+          <div class="r-label">J · Julat</div>
+          <div class="r-value">${Julat.toFixed(2)}</div>
+        </div>
+        <div class="result-item">
+          <div class="r-label">Atas (Body)</div>
+          <div class="r-value">${Atas.toFixed(2)}</div>
+        </div>
+        <div class="result-item">
+          <div class="r-label">Bawah (Body)</div>
+          <div class="r-value">${Bawah.toFixed(2)}</div>
+        </div>
+      `;
+
+      // Overlay labels
+      const biasEl = document.getElementById('biasLabel');
+      if (isBull) {
+        biasEl.textContent = 'BULLISH';
+        biasEl.className = 'value bias-bull';
+      } else if (Neto < Awal) {
+        biasEl.textContent = 'BEARISH';
+        biasEl.className = 'value bias-bear';
+      } else {
+        biasEl.textContent = 'NEUTRAL';
+        biasEl.className = 'value bias-neutral';
+      }
+      document.getElementById('rangeLabel').textContent = Julat.toFixed(2);
+
+      // Range bar fill
+      const fill = document.getElementById('rangeFill');
+      fill.style.width = '100%';
+    }
+
+    // ===== PRESETS =====
+    function setPreset(type) {
+      if (type === 'bull') {
+        Tinggi = 2684.50; Awal = 2652.00; Rendah = 2645.00; Inti = 2668.00;
+      } else if (type === 'bear') {
+        Tinggi = 2680.00; Awal = 2675.00; Rendah = 2640.00; Inti = 2658.00;
+      } else if (type === 'doji') {
+        Tinggi = 2670.00; Awal = 2658.50; Rendah = 2648.00; Inti = 2658.70;
+      } else if (type === 'long') {
+        Tinggi = 2695.00; Awal = 2660.00; Rendah = 2625.00; Inti = 2665.00;
+      } else if (type === 'hammer') {
+        Tinggi = 2668.00; Awal = 2660.00; Rendah = 2630.00; Inti = 2663.00;
+      } else if (type === 'random') {
+        const base = 2640 + Math.random() * 40;
+        const range = 15 + Math.random() * 25;
+        Awal = +(base + (Math.random() - 0.5) * 8).toFixed(2);
+        Inti = +(base + (Math.random() - 0.5) * 6).toFixed(2);
+        Tinggi = +(Math.max(Awal, Inti) + Math.random() * range * 0.5).toFixed(2);
+        Rendah = +(Math.min(Awal, Inti) - Math.random() * range * 0.5).toFixed(2);
+      }
+      syncAllInputs();
+      drawCrystal();
+      showToast('Preset: ' + type.charAt(0).toUpperCase() + type.slice(1));
+    }
+
+    function syncAllInputs() {
+      ['Tinggi','Awal','Rendah','Inti'].forEach(k => {
+        const val = { Tinggi, Awal, Rendah, Inti }[k];
+        document.getElementById('val' + k).value = val.toFixed(2);
+        document.getElementById('slider' + k).value = val;
+      });
+    }
+
+    // ===== DIRECTION =====
+    function setDir(naik) {
+      if (naik === isNaik) return;
+      isNaik = naik;
+      document.getElementById('btnNaik').className = naik ? 'active-naik' : '';
+      document.getElementById('btnTurun').className = naik ? '' : 'active-turun';
+      Awal = +(2 * Inti - Awal).toFixed(2);
+      document.getElementById('valAwal').value = Awal.toFixed(2);
+      document.getElementById('sliderAwal').value = Awal;
+      drawCrystal();
+      showToast(naik ? 'Arah: Naik' : 'Arah: Turun');
+    }
+
+    // ===== CONTROLS =====
+    let dragging = false, prev = {};
+    let targetRotX = 0.15, targetRotY = 0;
+    let currentRotX = 0.15, currentRotY = 0;
+    let zoom = 16;
+
+    box.addEventListener('mousedown', e => {
+      dragging = true;
+      prev = { x: e.clientX, y: e.clientY };
+    });
+    window.addEventListener('mouseup', () => dragging = false);
+    window.addEventListener('mousemove', e => {
+      if (!dragging) return;
+      targetRotY += (e.clientX - prev.x) * 0.008;
+      targetRotX += (e.clientY - prev.y) * 0.008;
+      targetRotX = Math.max(-1.2, Math.min(1.2, targetRotX));
+      prev = { x: e.clientX, y: e.clientY };
+    });
+
+    // Touch support
+    box.addEventListener('touchstart', e => {
+      if (e.touches.length === 1) {
+        dragging = true;
+        prev = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      }
+    }, { passive: true });
+    window.addEventListener('touchend', () => dragging = false);
+    window.addEventListener('touchmove', e => {
+      if (!dragging || e.touches.length !== 1) return;
+      targetRotY += (e.touches[0].clientX - prev.x) * 0.01;
+      targetRotX += (e.touches[0].clientY - prev.y) * 0.01;
+      targetRotX = Math.max(-1.2, Math.min(1.2, targetRotX));
+      prev = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }, { passive: true });
+
+    // Zoom
+    box.addEventListener('wheel', e => {
+      e.preventDefault();
+      zoom += e.deltaY * 0.015;
+      zoom = Math.max(8, Math.min(28, zoom));
+    }, { passive: false });
+
+    function resetView() {
+      targetRotX = 0.15;
+      targetRotY = 0;
+      zoom = 16;
+      showToast('View di-reset');
+    }
+
+    function copyValues() {
+      const Neto = 2 * Inti - Awal;
+      const text = `T:${Tinggi.toFixed(2)} A:${Awal.toFixed(2)} R:${Rendah.toFixed(2)} I:${Inti.toFixed(2)} N:${Neto.toFixed(2)}`;
+      navigator.clipboard.writeText(text).then(() => showToast('Nilai disalin ke clipboard'));
+    }
+
+    function exportPNG() {
+      const link = document.createElement('a');
+      link.download = `tabranij-${Date.now()}.png`;
+      link.href = renderer.domElement.toDataURL('image/png');
+      link.click();
+      showToast('Gambar diekspor');
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2000);
+    }
+
+    // Resize
+    function resize() {
+      const w = box.clientWidth;
+      const h = box.clientHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // Animate
+    drawCrystal();
+    function animate() {
+      requestAnimationFrame(animate);
+      // Smooth rotation
+      currentRotX += (targetRotX - currentRotX) * 0.1;
+      currentRotY += (targetRotY - currentRotY) * 0.1;
+      crystal.rotation.x = currentRotX;
+      crystal.rotation.y = currentRotY;
+      // Auto-rotate when idle
+      if (!dragging) targetRotY += 0.003;
+      // Smooth zoom
+      camera.position.z += (zoom - camera.position.z) * 0.08;
+      renderer.render(scene, camera);
+    }
+    animate();
+  </script>
+</body>
+</html>
