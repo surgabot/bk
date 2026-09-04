@@ -1,25 +1,19 @@
-# Tabranij Pro v3.1 — TARI
+# Tabranij Pro v3.1 — TARI (3D)
 
-## Status
+Versi yang dikembalikan ke kondisi yang sudah jalan (~01.10 WIB).
 
-Loader multi-file di repo sedang diperbaiki.
-
-**Sementara:** pakai file tunggal `tabranij-pro-v31.html` yang dibagikan di chat Grok.
+## Cara buka
 
 ```bash
+cd tools/tabranij-visualizer
 python3 -m http.server 8080
-# buka http://localhost:8080/tabranij-pro-v31.html
+# buka http://localhost:8080
 ```
 
-## Model matematis
+File wajib: `index.html` + `p0.js` + `p1.js` + `p2.js` + `p3.js`
 
-| Jenis | Kode | Rumus / arti |
-|-------|------|----------------|
-| Titik | **TARI** | Tinggi, Awal, Rendah, Inti |
-| Rentang | Atas | `T − max(Awal, I)` |
-| Rentang | Bawah | `min(Awal, I) − R` |
-| Rentang | Neto | `|I − Awal|` |
-| Rentang | Julat | `T − R` |
+## Model
 
-**Identitas:** `Julat = Atas + Neto + Bawah`  
-**Bias:** naik jika `I ≥ Awal`
+- Titik **TARI**: Tinggi, Awal, Rendah, Inti
+- Rentang: Atas, Bawah, Neto, Julat
+- Visual: Three.js 3D

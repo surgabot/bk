@@ -1,45 +1,19 @@
 <!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>TABRANIJ Pro v3.1 — Petunjuk</title>
-<style>
-body{margin:0;background:#06080f;color:#e8eefc;font-family:system-ui,sans-serif;padding:32px;line-height:1.5;max-width:640px}
-h1{font-size:1.3rem;margin-bottom:8px}
-code,pre{background:#111827;padding:2px 6px;border-radius:4px;font-size:.85rem}
-pre{padding:12px;overflow:auto;border:1px solid #1e2a3f}
-.box{background:#0b101c;border:1px solid #1e2a3f;border-radius:10px;padding:16px;margin:16px 0}
-.ok{color:#34d399}.warn{color:#fbbf24}
-a{color:#38bdf8}
-</style>
-</head>
+<html><head><meta charset="UTF-8"><title>TABRANIJ Pro v3.1 — TARI</title></head>
 <body>
-<h1>TABRANIJ Pro v3.1 (TARI)</h1>
-<p class="warn">Loader di repo sedang diperbaiki. Sementara pakai <b>file tunggal</b> dari chat Grok.</p>
-
-<div class="box">
-<strong class="ok">Cara benar:</strong>
-<ol>
-<li>Download file <code>tabranij-pro-v31.html</code> dari pesan Grok</li>
-<li>Simpan di folder mana saja</li>
-<li>Jalankan:
-<pre>python3 -m http.server 8080</pre>
-</li>
-<li>Buka <code>http://localhost:8080/tabranij-pro-v31.html</code></li>
-</ol>
-<p>Atau double-click file HTML (biasanya tetap jalan).</p>
-</div>
-
-<div class="box">
-<strong>Isi tool:</strong>
-<ul>
-<li>Titik TARI: Tinggi, Awal, Rendah, Inti</li>
-<li>Rentang: Atas, Neto, Bawah, Julat (+ overlay angka)</li>
-<li>Multi-candle, timeframe, preset, history</li>
-</ul>
-</div>
-
-<p>Buku pegangan tetap di folder <code>docs/</code>.</p>
-</body>
-</html>
+<p style="font-family:sans-serif;color:#888;padding:20px">Loading Tabranij Pro v3.1 (TARI)…</p>
+<script src="p0.js"></script>
+<script src="p1.js"></script>
+<script src="p2.js"></script>
+<script src="p3.js"></script>
+<script>
+window.__TB64=window.__P0+window.__P1+window.__P2+window.__P3;
+async function go(){
+  const bin=Uint8Array.from(atob(window.__TB64),c=>c.charCodeAt(0));
+  const ds=new DecompressionStream("gzip");
+  const ab=await new Response(new Blob([bin]).stream().pipeThrough(ds)).arrayBuffer();
+  document.open();document.write(new TextDecoder().decode(ab));document.close();
+}
+go().catch(e=>{document.body.innerHTML="<pre style=color:red>"+e+"\n\npython3 -m http.server 8080</pre>"});
+</script>
+</body></html>
