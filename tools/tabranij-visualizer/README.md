@@ -1,6 +1,30 @@
-# Tabranij Pro v3.1 — TARI (3D)
+# Tabranij Pro v3.1 — TARI
 
-Versi yang dikembalikan ke kondisi yang sudah jalan (~01.10 WIB).
+Visualizer diselaraskan dengan definisi final TABRANIJ di buku pegangan.
+
+## Model matematis
+
+### Titik (TARI)
+| Kode | Input tool | Arti |
+|------|------------|------|
+| **T** | Tinggi | High |
+| **A** | Awal | Open (konstanta) |
+| **R** | Rendah | Low |
+| **I** | Inti | Close / harga saat ini |
+
+### Rentang (otomatis)
+| Kode | Rumus | Arti |
+|------|--------|------|
+| **Atas** | `T − max(Awal, I)` | Wick atas |
+| **Bawah** | `min(Awal, I) − R` | Wick bawah |
+| **Neto** | `|I − Awal|` | Lebar body |
+| **Julat** | `T − R` | Range penuh |
+
+**Identitas:** `Julat = Atas + Neto + Bawah` (dicek di UI dengan ✓)
+
+**Bias:** Bullish jika `I ≥ Awal`, Bearish jika `I < Awal`
+
+Body digambar dari **Awal → Inti**.
 
 ## Cara buka
 
@@ -10,10 +34,9 @@ python3 -m http.server 8080
 # buka http://localhost:8080
 ```
 
-File wajib: `index.html` + `p0.js` + `p1.js` + `p2.js` + `p3.js`
+## File yang dibutuhkan
 
-## Model
+- `index.html` — loader
+- `p0.js` … `p3.js` — payload aplikasi (gzip+base64)
 
-- Titik **TARI**: Tinggi, Awal, Rendah, Inti
-- Rentang: Atas, Bawah, Neto, Julat
-- Visual: Three.js 3D
+> Download ZIP repo, extract, lalu jalankan local server di folder ini.
