@@ -2,35 +2,49 @@
 
 **Metode GT (Grafik Tabranij)**
 
-Repository private untuk buku pegangan internal grup investasi & trading yang menggunakan metode **GT (Grafik Tabranij)**.
+Repository private untuk buku pegangan internal grup investasi & trading.
+
+## Mulai di sini
+
+- **[Daftar Isi Buku](docs/00-daftar-isi.md)**
+- **[Bab 1 — Pengenalan](docs/01-pengenalan.md)**
+- **[Bab 2 — Konsep GT](docs/02-konsep-gt.md)**
+- **[Bab 3 — Parameter TABRANIJ](docs/03-parameter-tabranij.md)**
+- **Tool:** [Tabranij Pro v3](tools/tabranij-visualizer/)
 
 ## Struktur Repository
 
 ```
 bk/
-├── README.md
-├── docs/                 # Isi buku pegangan (bab & materi)
+├── docs/                      # Isi buku pegangan
+│   ├── 00-daftar-isi.md
 │   ├── 01-pengenalan.md
 │   ├── 02-konsep-gt.md
-│   └── ...
-├── tools/                # Tool interaktif GT
-│   └── tabranij-visualizer/
-├── assets/               # Gambar, diagram, media pendukung
-├── contoh/               # Contoh kasus & analisa
-└── referensi/            # Referensi tambahan
+│   ├── 03-parameter-tabranij.md
+│   └── … (bab selanjutnya)
+├── tools/tabranij-visualizer/ # Tool 3D interaktif
+├── assets/                    # Gambar & diagram
+├── contoh/                    # Contoh kasus
+└── referensi/
 ```
 
-## Metode GT (Grafik Tabranij)
+## Parameter GT (ringkas)
 
-Metode visualisasi dan analisa grafik berbasis parameter:
-- **T** — Tinggi
-- **A** — Awal / Atas
-- **B** — Bawah
-- **R** — Rendah
-- **N** — Neto
-- **I** — Inti
-- **J** — Julat
+| Kode | Nama | Keterangan |
+|------|------|------------|
+| **T** | Tinggi | High / titik tertinggi |
+| **A** | Awal | Open / acuan awal |
+| **R** | Rendah | Low / titik terendah |
+| **I** | Inti | Poros (core) |
+| **N** | Neto | `2 × I − A` |
+| **J** | Julat | Rentang struktur GT |
+
+Bias: **Bullish** jika `N ≥ A`, **Bearish** jika `N < A`.
 
 ## Status
 
-Repository ini masih dalam tahap pengembangan. Tool visualisasi interaktif akan dikembangkan lebih canggih dari versi dasar.
+| Komponen | Status |
+|----------|--------|
+| Tool Tabranij Pro v3 | ✅ Multi-candle, TF, History |
+| Bab 1–3 (Fondasi) | ✅ Terisi |
+| Bab 4–12 | ⏳ Menyusul |
