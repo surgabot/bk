@@ -1,28 +1,38 @@
 # Tabranij Pro v3.0
 
-Visualizer 3D metode GT dengan fitur:
+Visualizer 3D metode **GT (Grafik Tabranij)** dengan fitur lanjutan.
 
-- **Multi-Candle** — tampilkan series candle berdampingan
-- **Timeframe** — M1, M5, M15, H1, H4, D1
-- **History** — simpan/muat parameter (localStorage)
-- Single & Multi mode
-- Export PNG, Copy values, Preset, Direction flip
+## Fitur Baru
 
-## Cara pakai
+| Fitur | Keterangan |
+|-------|------------|
+| **Multi-Candle** | Tampilkan 2–12 candle berdampingan di scene 3D |
+| **Timeframe** | M1 · M5 · M15 · H1 · H4 · D1 (slider range menyesuaikan) |
+| **History** | Simpan/muat state (localStorage, max 30 entry) |
+| Mode Single/Multi | Toggle cepat |
+| Generate Series | Buat series acak dengan drift harga |
+| Navigasi Candle | Tombol ‹ › untuk pilih candle aktif |
+| + Candle | Tambah candle manual ke series |
+| Export PNG · Copy · Direction flip | Tetap tersedia |
 
-1. Download `index.html`
-2. Buka di browser
+## Cara Membuka
 
-Atau buka langsung dari repo (raw / local clone).
+1. Download folder `tools/tabranij-visualizer/` (index.html + d0.js + d1.js)
+2. Buka `index.html` di browser **via local server**:
 
-## Fitur Multi-Candle
+```bash
+cd tools/tabranij-visualizer
+python3 -m http.server 8080
+# lalu buka http://localhost:8080
+```
 
-1. Pilih mode **Multi**
-2. Klik **Generate** untuk buat series acak
-3. Navigasi candle dengan tombol ‹ ›
-4. Edit parameter candle aktif
-5. **+ Candle** untuk tambah manual
+> Karena app di-load via script + gzip decompress, buka lewat `file://` langsung mungkin gagal (CORS). Gunakan local server seperti di atas.
 
-## History
+## File
 
-Klik 💾 untuk menyimpan state saat ini. History tersimpan di browser (localStorage), max 30 entry.
+- `index.html` — loader
+- `d0.js` / `d1.js` — payload aplikasi (gzip+base64)
+
+## Status
+
+✅ v3.0 siap dipakai
