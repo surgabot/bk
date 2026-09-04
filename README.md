@@ -6,14 +6,23 @@ Repository private untuk buku pegangan internal grup investasi & trading.
 
 ## Mulai di sini
 
-- **[Daftar Isi Buku](docs/00-daftar-isi.md)**
-- **[Bab 1 — Pengenalan](docs/01-pengenalan.md)**
-- **[Bab 2 — Konsep GT](docs/02-konsep-gt.md)**
-- **[Bab 3 — Parameter TABRANIJ](docs/03-parameter-tabranij.md)**
-- **[Bab 4 — Membaca Candle dengan GT](docs/04-membaca-candle.md)**
-- **[Bab 5 — Bias, Arah, dan Struktur](docs/05-bias-arah-struktur.md)**
-- **[Bab 6 — Multi-Candle & Timeframe](docs/06-multi-candle-timeframe.md)**
-- **Tool:** [Tabranij Pro](tools/tabranij-visualizer/) · file stabil: unduh HTML tunggal dari rilis / artifacts
+**Fondasi**
+- [Bab 1 — Pengenalan](docs/01-pengenalan.md)
+- [Bab 2 — Konsep GT](docs/02-konsep-gt.md)
+- [Bab 3 — Parameter TABRANIJ](docs/03-parameter-tabranij.md)
+
+**Membaca Grafik**
+- [Bab 4 — Membaca Candle dengan GT](docs/04-membaca-candle.md)
+- [Bab 5 — Bias, Arah, dan Struktur](docs/05-bias-arah-struktur.md)
+- [Bab 6 — Multi-Candle & Timeframe](docs/06-multi-candle-timeframe.md)
+
+**Eksekusi**
+- [Bab 7 — Setup Entry & Exit](docs/07-entry-exit.md)
+- [Bab 8 — Manajemen Risiko](docs/08-manajemen-risiko.md)
+- [Bab 9 — Contoh Kasus](docs/09-contoh-kasus.md)
+
+- **[Daftar Isi Lengkap](docs/00-daftar-isi.md)**
+- **Tool:** [Tabranij Pro](tools/tabranij-visualizer/)
 
 ---
 
@@ -69,6 +78,6 @@ bk/
 | Pengertian TABRANIJ | ✅ Final (TARI + rentang) |
 | Bab 1–3 (Fondasi) | ✅ |
 | Bab 4–6 (Membaca Grafik) | ✅ |
-| Bab 7–9 (Eksekusi) | ⏳ Menyusul |
+| Bab 7–9 (Eksekusi) | ✅ |
 | Bab 10–12 (Alat & Disiplin) | ⏳ Menyusul |
-| Tool visualizer | ✅ File HTML stabil (loader multi-part opsional) |
+| Tool visualizer | ✅ File HTML stabil |
