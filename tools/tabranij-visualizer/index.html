@@ -1,19 +1,34 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><title>TABRANIJ Pro v3.1 — TARI</title></head>
-<body>
-<p style="font-family:sans-serif;color:#888;padding:20px">Loading Tabranij Pro v3.1 (TARI)…</p>
+<html lang="id"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>TABRANIJ Pro v3.1 — TARI</title></head>
+<body style="margin:0;background:#06080f;color:#8b97b8;font-family:system-ui;padding:24px">
+<p id="msg">Memuat Tabranij Pro v3.1 (TARI)…</p>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
 <script src="p0.js"></script>
 <script src="p1.js"></script>
 <script src="p2.js"></script>
 <script src="p3.js"></script>
 <script>
-window.__TB64=window.__P0+window.__P1+window.__P2+window.__P3;
-async function go(){
-  const bin=Uint8Array.from(atob(window.__TB64),c=>c.charCodeAt(0));
-  const ds=new DecompressionStream("gzip");
-  const ab=await new Response(new Blob([bin]).stream().pipeThrough(ds)).arrayBuffer();
-  document.open();document.write(new TextDecoder().decode(ab));document.close();
-}
-go().catch(e=>{document.body.innerHTML="<pre style=color:red>"+e+"\n\npython3 -m http.server 8080</pre>"});
+(function(){
+  try {
+    if (typeof pako === "undefined") throw new Error("pako gagal dimuat (perlu internet)");
+    if (!window.__P0 || !window.__P1 || !window.__P2 || !window.__P3)
+      throw new Error("File p0.js–p3.js tidak lengkap. Pastikan 4 file ada di folder yang sama.");
+    var b64 = window.__P0 + window.__P1 + window.__P2 + window.__P3;
+    var bin = Uint8Array.from(atob(b64), function(c){ return c.charCodeAt(0); });
+    var html = pako.ungzip(bin, { to: "string" });
+    document.open();
+    document.write(html);
+    document.close();
+  } catch (e) {
+    document.getElementById("msg").innerHTML =
+      "<b style=color:#f87171>Error:</b> " + e.message +
+      "<br><br>Cara benar:<br>1. cd tools/tabranij-visualizer<br>" +
+      "2. python3 -m http.server 8080<br>" +
+      "3. Buka <b>http://localhost:8080</b> (bukan file://)<br>" +
+      "4. Pastikan p0.js p1.js p2.js p3.js ada di folder ini";
+    console.error(e);
+  }
+})();
 </script>
 </body></html>
