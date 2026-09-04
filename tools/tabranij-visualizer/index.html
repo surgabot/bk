@@ -1,20 +1,45 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><title>TABRANIJ Pro v3.1</title></head>
-<body style="margin:0;background:#06080f;color:#8b97b8;font-family:system-ui;padding:20px">
-<p id="msg">Memuat…</p>
-<script>
-(async function(){
-  try{
-    var a=[];
-    for(var i=0;i<3;i++){
-      var r=await fetch("m"+i+".html");
-      if(!r.ok) throw new Error("part m"+i+".html gagal (HTTP "+r.status+")");
-      a.push(await r.text());
-    }
-    document.open();document.write(a.join(""));document.close();
-  }catch(e){
-    document.getElementById("msg").innerHTML="<b style=color:#f87171>Error:</b> "+(e.message||e)+
-    "<br><br>Jalankan: <code>python3 -m http.server 8080</code><br>Buka http://localhost:8080<br>File: index.html + m0.html + m1.html + m2.html";
-  }
-})();
-</script></body></html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>TABRANIJ Pro v3.1 — Petunjuk</title>
+<style>
+body{margin:0;background:#06080f;color:#e8eefc;font-family:system-ui,sans-serif;padding:32px;line-height:1.5;max-width:640px}
+h1{font-size:1.3rem;margin-bottom:8px}
+code,pre{background:#111827;padding:2px 6px;border-radius:4px;font-size:.85rem}
+pre{padding:12px;overflow:auto;border:1px solid #1e2a3f}
+.box{background:#0b101c;border:1px solid #1e2a3f;border-radius:10px;padding:16px;margin:16px 0}
+.ok{color:#34d399}.warn{color:#fbbf24}
+a{color:#38bdf8}
+</style>
+</head>
+<body>
+<h1>TABRANIJ Pro v3.1 (TARI)</h1>
+<p class="warn">Loader di repo sedang diperbaiki. Sementara pakai <b>file tunggal</b> dari chat Grok.</p>
+
+<div class="box">
+<strong class="ok">Cara benar:</strong>
+<ol>
+<li>Download file <code>tabranij-pro-v31.html</code> dari pesan Grok</li>
+<li>Simpan di folder mana saja</li>
+<li>Jalankan:
+<pre>python3 -m http.server 8080</pre>
+</li>
+<li>Buka <code>http://localhost:8080/tabranij-pro-v31.html</code></li>
+</ol>
+<p>Atau double-click file HTML (biasanya tetap jalan).</p>
+</div>
+
+<div class="box">
+<strong>Isi tool:</strong>
+<ul>
+<li>Titik TARI: Tinggi, Awal, Rendah, Inti</li>
+<li>Rentang: Atas, Neto, Bawah, Julat (+ overlay angka)</li>
+<li>Multi-candle, timeframe, preset, history</li>
+</ul>
+</div>
+
+<p>Buku pegangan tetap di folder <code>docs/</code>.</p>
+</body>
+</html>

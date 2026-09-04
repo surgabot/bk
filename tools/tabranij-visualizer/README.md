@@ -1,42 +1,25 @@
 # Tabranij Pro v3.1 — TARI
 
-Visualizer diselaraskan dengan definisi final TABRANIJ di buku pegangan.
+## Status
+
+Loader multi-file di repo sedang diperbaiki.
+
+**Sementara:** pakai file tunggal `tabranij-pro-v31.html` yang dibagikan di chat Grok.
+
+```bash
+python3 -m http.server 8080
+# buka http://localhost:8080/tabranij-pro-v31.html
+```
 
 ## Model matematis
 
-### Titik (TARI)
-| Kode | Input tool | Arti |
-|------|------------|------|
-| **T** | Tinggi | High |
-| **A** | Awal | Open (konstanta) |
-| **R** | Rendah | Low |
-| **I** | Inti | Close / harga saat ini |
+| Jenis | Kode | Rumus / arti |
+|-------|------|----------------|
+| Titik | **TARI** | Tinggi, Awal, Rendah, Inti |
+| Rentang | Atas | `T − max(Awal, I)` |
+| Rentang | Bawah | `min(Awal, I) − R` |
+| Rentang | Neto | `|I − Awal|` |
+| Rentang | Julat | `T − R` |
 
-### Rentang (otomatis)
-| Kode | Rumus | Arti |
-|------|--------|------|
-| **Atas** | `T − max(Awal, I)` | Wick atas |
-| **Bawah** | `min(Awal, I) − R` | Wick bawah |
-| **Neto** | `|I − Awal|` | Lebar body |
-| **Julat** | `T − R` | Range penuh |
-
-**Identitas:** `Julat = Atas + Neto + Bawah` (dicek di UI dengan ✓)
-
-**Bias:** Bullish jika `I ≥ Awal`, Bearish jika `I < Awal`
-
-Body digambar dari **Awal → Inti**.
-
-## Cara buka
-
-```bash
-cd tools/tabranij-visualizer
-python3 -m http.server 8080
-# buka http://localhost:8080
-```
-
-## File yang dibutuhkan
-
-- `index.html` — loader
-- `p0.js` … `p3.js` — payload aplikasi (gzip+base64)
-
-> Download ZIP repo, extract, lalu jalankan local server di folder ini.
+**Identitas:** `Julat = Atas + Neto + Bawah`  
+**Bias:** naik jika `I ≥ Awal`
