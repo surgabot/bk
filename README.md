@@ -20,31 +20,31 @@ Repository private untuk buku pegangan internal grup investasi & trading.
 
 Urutan huruf: **T · A · B · R · A · N · I · J**
 
-| Kode | Komponen | Representasi matematis | Keterangan |
-|------|----------|------------------------|------------|
-| **T** | Tinggi | Puncak Atas | Harga tertinggi pada suatu periode |
-| **A** | Atas | Kodomain Atas | Sumbu atas (atasnya neto/body) |
-| **B** | Bawah | Kodomain Bawah | Sumbu bawah (bawahnya neto/body) |
-| **R** | Rendah | Dasar Bawah | Harga terendah pada suatu periode |
-| **A** | Awal | Konstanta | Harga awal / pembukaan pada suatu periode |
-| **N** | Neto | Domain | Harga antara awal dan inti (body) |
-| **I** | Inti | Variabel Saat Ini | Harga sekarang / harga penutupan |
-| **J** | Julat | Range | Jangkauan antara rendah dan tinggi |
+### Dua jenis komponen
 
-### Cara menghafal (asosiasi)
+**Titik (posisi harga) — akronim TARI**
 
-```
-T  Tinggi     → puncak
-A  Atas       → sumbu atas body
-B  Bawah      → sumbu bawah body
-R  Rendah     → dasar
-A  Awal       → konstanta (open)
-N  Neto       → domain body
-I  Inti       → variabel saat ini (close)
-J  Julat      → range T−R
-```
+| Kode | Komponen | Keterangan |
+|------|----------|------------|
+| **T** | Tinggi | Harga tertinggi periode (puncak) |
+| **A** | Awal | Harga pembukaan (konstanta) |
+| **R** | Rendah | Harga terendah periode (dasar) |
+| **I** | Inti | Harga saat ini / penutupan (variabel) |
 
-Baca dari luar ke dalam: **Tinggi–Rendah** membungkus **Atas–Bawah** body, yang terbentuk dari **Awal–Inti** (Neto), dengan **Julat** sebagai ukuran jangkauan.
+> Hafalkan: **TARI** = **T**inggi · **A**wal · **R**endah · **I**nti
+
+**Rentang (ukuran ruang)**
+
+| Kode | Komponen | Rumus | Keterangan |
+|------|----------|--------|------------|
+| **A** | Atas | `T − max(Awal, I)` | Panjang wick atas |
+| **B** | Bawah | `min(Awal, I) − R` | Panjang wick bawah |
+| **N** | Neto | `\|I − Awal\|` | Lebar body |
+| **J** | Julat | `T − R` | Jangkauan penuh periode |
+
+**Identitas:** `Julat = Atas + Neto + Bawah`
+
+**Bias:** naik jika `I ≥ Awal`, turun jika `I < Awal`.
 
 ---
 
@@ -52,8 +52,8 @@ Baca dari luar ke dalam: **Tinggi–Rendah** membungkus **Atas–Bawah** body, y
 
 ```
 bk/
-├── docs/                      # Isi buku pegangan
-├── tools/tabranij-visualizer/ # Tool 3D interaktif
+├── docs/
+├── tools/tabranij-visualizer/
 ├── assets/
 ├── contoh/
 └── referensi/
@@ -63,7 +63,7 @@ bk/
 
 | Komponen | Status |
 |----------|--------|
-| Pengertian TABRANIJ | ✅ Resmi (tabel di atas) |
-| Tool Tabranij Pro v3 | ✅ Multi-candle, TF, History |
+| Pengertian TABRANIJ | ✅ Final (TARI + rentang) |
+| Tool Tabranij Pro v3 | ✅ Ada (akan diselaraskan rumus) |
 | Bab 1–3 (Fondasi) | ✅ Diselaraskan |
 | Bab 4–12 | ⏳ Menyusul |

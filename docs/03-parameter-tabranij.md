@@ -1,132 +1,119 @@
 # Bab 3 — Parameter TABRANIJ
 
-> Definisi resmi kode, komponen, representasi matematis, dan keterangan.
+> Definisi final: titik **TARI** dan empat **rentang**.
 
 ---
 
-## 3.1 Asal-usul nama TABRANIJ
+## 3.1 Asal-usul nama
 
-**TABRANIJ** bukan singkatan acak. Huruf-hurufnya **disusun, ditimbang, dan ditata** agar:
-
-1. **Kalimat** — urutan baca terasa alami (dari puncak ke dasar, dari open ke close)  
-2. **Visual** — setiap kode bisa dikaitkan dengan posisi di candle  
-3. **Bilingual** — istilah Indonesia + padanan matematis (puncak, kodomain, domain, range)  
-4. **Hafalan** — asosiasi kuat: satu rangkaian huruf = satu sistem baca lengkap  
-
-Urutan tetap: **T – A – B – R – A – N – I – J**
-
----
-
-## 3.2 Tabel master (definisi resmi)
-
-| No | Kode | Komponen | Representasi matematis | Keterangan |
-|----|------|----------|------------------------|------------|
-| 1 | **T** | Tinggi | Puncak Atas | Harga tertinggi pada suatu periode |
-| 2 | **A** | Atas | Kodomain Atas | Sumbu atas (atasnya neto/body) |
-| 3 | **B** | Bawah | Kodomain Bawah | Sumbu bawah (bawahnya neto/body) |
-| 4 | **R** | Rendah | Dasar Bawah | Harga terendah pada suatu periode |
-| 5 | **A** | Awal | Konstanta | Harga awal / pembukaan pada suatu periode |
-| 6 | **N** | Neto | Domain | Harga antara awal dan inti (body) |
-| 7 | **I** | Inti | Variabel Saat Ini | Harga sekarang / harga penutupan |
-| 8 | **J** | Julat | Range | Jangkauan antara rendah dan tinggi |
-
-### Catatan dua huruf **A**
-
-Dalam TABRANIJ ada **dua peran “A”** yang berbeda konteks:
-
-| Konteks | Makna |
-|---------|--------|
-| **A = Atas** | Kodomain atas body (sumbu atas neto) |
-| **A = Awal** | Konstanta pembukaan periode |
-
-Saat berbicara, sebut lengkap: **“Atas”** atau **“Awal”**, jangan hanya “A”, agar tidak ambigu.
-
----
-
-## 3.3 Pemetaan visual di candle
+**TABRANIJ** disusun agar mudah dihafal (kalimat, visual, bilingual).  
+Empat **titik** di dalamnya diikat lagi sebagai akronim **TARI**:
 
 ```
-        T  ← Tinggi (Puncak Atas)
-        │
-        │     wick atas
-        │
-    A ──┤  ← Atas (Kodomain Atas)  = max(Awal, Inti)
-        │
-        │     N = Neto (Domain / body)
-        │
-    B ──┤  ← Bawah (Kodomain Bawah) = min(Awal, Inti)
-        │
-        │     wick bawah
-        │
-        R  ← Rendah (Dasar Bawah)
-
-    Awal (Konstanta) ── open
-    Inti (Variabel)  ── close / harga saat ini
-    Julat (Range)    ── T − R  (jangkauan penuh)
+TARI = Tinggi · Awal · Rendah · Inti
 ```
 
 ---
 
-## 3.4 Hubungan matematis ringkas
+## 3.2 Tabel master final
 
-| Relasi | Rumus / aturan |
-|--------|----------------|
-| Atas (kodomain) | `Atas = max(Awal, Inti)` |
-| Bawah (kodomain) | `Bawah = min(Awal, Inti)` |
-| Neto (domain) | Segmen harga **antara Awal dan Inti** (body) |
-| Julat (range) | `J = Tinggi − Rendah` = `T − R` |
-| Bias naik | Inti ≥ Awal (body menutup di atas atau sama dengan open) |
-| Bias turun | Inti < Awal |
+### A. Titik (posisi harga) — TARI
 
-**Inti** = variabel saat ini (penutupan / harga sekarang).  
-**Awal** = konstanta pembukaan periode yang sedang dibaca.
+| Urutan TARI | Kode | Komponen | Representasi | Keterangan |
+|-------------|------|----------|--------------|------------|
+| 1 | **T** | Tinggi | Puncak Atas | Harga tertinggi periode |
+| 2 | **A** | Awal | Konstanta | Harga pembukaan periode |
+| 3 | **R** | Rendah | Dasar Bawah | Harga terendah periode |
+| 4 | **I** | Inti | Variabel Saat Ini | Harga sekarang / penutupan |
+
+### B. Rentang (ukuran ruang)
+
+| Kode | Komponen | Representasi | Rumus | Keterangan |
+|------|----------|--------------|--------|------------|
+| **A** | Atas | Kodomain / wick atas | `T − max(Awal, I)` | Panjang wick atas |
+| **B** | Bawah | Kodomain / wick bawah | `min(Awal, I) − R` | Panjang wick bawah |
+| **N** | Neto | Domain body | `\|I − Awal\|` | Lebar body |
+| **J** | Julat | Range | `T − R` | Jangkauan penuh |
+
+**Identitas:**
+
+```
+Julat = Atas + Neto + Bawah
+```
 
 ---
 
-## 3.5 Asosiasi hafalan (bilingual)
+## 3.3 Dua huruf “A”
 
-| Kode | ID | EN / matematis | Gambar mental |
-|------|----|----------------|---------------|
-| T | Tinggi | Peak / High | Puncak gunung |
-| A | Atas | Upper codomain | Atap body |
-| B | Bawah | Lower codomain | Lantai body |
-| R | Rendah | Floor / Low | Dasar lembah |
-| A | Awal | Constant / Open | Titik mulai (tetap) |
-| N | Neto | Domain / Body | Isi di antara open–close |
-| I | Inti | Variable / Close | Titik “sekarang” |
-| J | Julat | Range | Lebar seluruh candle |
+| Sebutan | Jenis | Makna |
+|---------|--------|--------|
+| **Awal** | Titik (anggota TARI) | Open / konstanta |
+| **Atas** | Rentang | Wick atas |
+
+Selalu sebut **“Awal”** atau **“Atas”**, jangan hanya “A”.
+
+---
+
+## 3.4 Urutan kerja praktis
+
+1. Catat **TARI**: T, Awal, R, Inti  
+2. Hitung rentang:  
+   - `Atas = T − max(Awal, I)`  
+   - `Bawah = min(Awal, I) − R`  
+   - `Neto = |I − Awal|`  
+   - `Julat = T − R`  
+3. Verifikasi: `Atas + Neto + Bawah ≟ Julat`  
+4. Bias: `I ≥ Awal` → naik; `I < Awal` → turun  
+
+---
+
+## 3.5 Asosiasi hafalan
+
+| Kelompok | Isi | Gambar mental |
+|----------|-----|----------------|
+| **TARI** | Tinggi, Awal, Rendah, Inti | Empat “pasak” harga |
+| Rentang luar | Atas, Bawah | Wick atas & bawah |
+| Rentang isi | Neto | Ketebalan body |
+| Rentang total | Julat | Seluruh tinggi candle |
 
 Kalimat pengingat:
 
-> **Tinggi–Atas–Bawah–Rendah** mengurung struktur; **Awal–Neto–Inti** mengisi body; **Julat** mengukur jarak Rendah ke Tinggi.
+> Isi **TARI** dulu; lalu ukur **Atas–Neto–Bawah**; jumlahnya wajib sama dengan **Julat**.
 
 ---
 
-## 3.6 Checklist baca satu periode
+## 3.6 Checklist satu periode
 
-- [ ] **T** — sudah identifikasi harga tertinggi periode  
-- [ ] **R** — sudah identifikasi harga terendah periode  
-- [ ] **Awal** — open / konstanta pembukaan  
-- [ ] **Inti** — close / variabel saat ini  
-- [ ] **Atas / Bawah** — kodomain body = max/min (Awal, Inti)  
-- [ ] **Neto** — domain body terbaca (arah & ukuran)  
-- [ ] **Julat** — `T − R`  
-- [ ] Bias — Inti vs Awal (naik / turun)  
+**Titik (TARI)**  
+- [ ] Tinggi (T)  
+- [ ] Awal  
+- [ ] Rendah (R)  
+- [ ] Inti (I)  
+
+**Rentang**  
+- [ ] Atas = `T − max(Awal, I)`  
+- [ ] Bawah = `min(Awal, I) − R`  
+- [ ] Neto = `|I − Awal|`  
+- [ ] Julat = `T − R`  
+- [ ] `Atas + Neto + Bawah = Julat`  
+
+**Bias**  
+- [ ] Inti vs Awal → naik / turun  
 
 ---
 
-## 3.7 Preset di tool (latihan)
+## 3.7 Preset tool (latihan)
 
-| Preset | Karakter dalam bahasa TABRANIJ |
-|--------|--------------------------------|
-| Bullish | Inti ≥ Awal → Neto mengarah naik |
-| Bearish | Inti < Awal → Neto mengarah turun |
-| Doji | Awal ≈ Inti → Neto hampir nol |
-| Long Wick | Julat besar, wick panjang (T/R menjauh dari Atas–Bawah) |
-| Hammer | Wick bawah dominan (R jauh di bawah Bawah) |
+| Preset | Baca TABRANIJ |
+|--------|----------------|
+| Bullish | I ≥ Awal; Neto = lebar body naik |
+| Bearish | I < Awal; Neto = lebar body turun |
+| Doji | Neto ≈ 0 (Awal ≈ Inti) |
+| Long Wick | Atas dan/atau Bawah besar relatif Neto |
+| Hammer | Bawah dominan (wick bawah panjang) |
 | Random | Latihan acak |
 
 ---
 
-**Lanjut → Bab 4 (akan dilengkapi setelah fondasi ini dikunci)**  
+**Lanjut → Bab 4 (siap dilanjutkan)**  
 **Kembali → [Bab 2 — Konsep GT](02-konsep-gt.md)**

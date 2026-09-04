@@ -8,7 +8,7 @@ Tujuannya:
 
 - Menyamakan bahasa baca grafik di dalam grup  
 - Memberi kerangka kerja konsisten lewat kode **TABRANIJ**  
-- Memudahkan hafalan dan asosiasi visual  
+- Memudahkan hafalan (titik **TARI**, rentang Atas–Bawah–Neto–Julat)  
 - Mengurangi keputusan impulsif dengan aturan yang jelas  
 
 Bukan buku “jadi kaya cepat”. Ini buku **cara kerja**.
@@ -19,59 +19,59 @@ Bukan buku “jadi kaya cepat”. Ini buku **cara kerja**.
 
 **GT** = **Grafik Tabranij**.
 
-**TABRANIJ** adalah susunan huruf dan kode yang sudah **dipikirkan, ditimbang, dan ditata** agar:
+**TABRANIJ** adalah susunan huruf dan kode yang sudah **dipikirkan, ditimbang, dan ditata** agar kalimat, visual, dan bilingual-nya berkesan, sehingga mudah dihafal dan dipakai bersama.
 
-- kalimat pembacaannya berkesan,  
-- visual di grafik mudah dikenali,  
-- padanan bilingual/matematisnya jelas,  
-- sehingga **lebih mudah dihafal dan dipakai bersama**.
+Urutan huruf: **T – A – B – R – A – N – I – J**
 
-### Delapan komponen TABRANIJ
+### Titik — akronim TARI
 
-| Kode | Komponen | Representasi matematis | Keterangan |
-|------|----------|------------------------|------------|
-| **T** | Tinggi | Puncak Atas | Harga tertinggi pada suatu periode |
-| **A** | Atas | Kodomain Atas | Sumbu atas (atasnya neto/body) |
-| **B** | Bawah | Kodomain Bawah | Sumbu bawah (bawahnya neto/body) |
-| **R** | Rendah | Dasar Bawah | Harga terendah pada suatu periode |
-| **A** | Awal | Konstanta | Harga awal / pembukaan pada suatu periode |
-| **N** | Neto | Domain | Harga antara awal dan inti (body) |
-| **I** | Inti | Variabel Saat Ini | Harga sekarang / harga penutupan |
-| **J** | Julat | Range | Jangkauan antara rendah dan tinggi |
+| Kode | Komponen | Keterangan |
+|------|----------|------------|
+| **T** | Tinggi | Harga tertinggi pada suatu periode |
+| **A** | Awal | Harga pembukaan (konstanta) |
+| **R** | Rendah | Harga terendah pada suatu periode |
+| **I** | Inti | Harga saat ini / penutupan (variabel) |
 
-Hafalkan urutan hurufnya: **T-A-B-R-A-N-I-J**.
+> **TARI** = Tinggi · Awal · Rendah · Inti  
+> Empat titik harga yang wajib diisi dulu sebelum menghitung rentang.
+
+### Rentang — ukuran ruang
+
+| Kode | Komponen | Rumus | Keterangan |
+|------|----------|--------|------------|
+| **A** | Atas | `T − max(Awal, I)` | Rentang wick atas |
+| **B** | Bawah | `min(Awal, I) − R` | Rentang wick bawah |
+| **N** | Neto | `\|I − Awal\|` | Rentang body |
+| **J** | Julat | `T − R` | Rentang penuh periode |
+
+**Identitas kunci:**
+
+```
+Julat = Atas + Neto + Bawah
+```
 
 ---
 
 ## 1.3 Kenapa perlu kerangka yang sama
 
-Tanpa kerangka:
-
-- Satu anggota bilang “bullish”, yang lain “masih ragu”  
-- Entry beda-beda, risiko tidak terukur  
-- Sulit review trade secara objektif  
-
-Dengan TABRANIJ:
-
-- Semua memakai kode dan arti yang sama  
-- Bias (Inti vs Awal) bisa dicek ulang  
-- Diskusi grup lebih cepat dan tepat  
+Tanpa kerangka, bahasa bias dan entry mudah simpang siur.  
+Dengan TABRANIJ + TARI, semua anggota membaca titik yang sama, menghitung rentang yang sama, dan menyimpulkan bias dari `I` vs `Awal`.
 
 ---
 
 ## 1.4 Cara memakai buku ini
 
-1. **Kunci definisi TABRANIJ** (Bab 1–3) sampai hafal kode + artinya.  
-2. **Latihan di tool** Tabranij Pro — asosiasikan huruf dengan posisi di candle 3D.  
-3. **Bagian II** — baca struktur multi-candle & timeframe.  
-4. **Bagian III** — entry, exit, risiko.  
-5. **Checklist** (Bab 11) setiap sesi trading.  
+1. Hafalkan **TARI** (titik) dan empat **rentang**.  
+2. Latihan di tool Tabranij Pro.  
+3. Lanjut Bagian II (multi-candle & timeframe).  
+4. Bagian III (entry, exit, risiko).  
+5. Checklist harian setiap sesi.  
 
 ---
 
 ## 1.5 Batasan
 
-- Metode ini **alat bantu baca grafik**, bukan jaminan profit.  
+- Alat bantu baca grafik, bukan jaminan profit.  
 - Market bisa invalidasi setup kapan saja.  
 - Disiplin risiko lebih penting daripada menebak arah.  
 
